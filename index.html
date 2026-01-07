@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kuis Sejarah - Pendudukan Jepang</title>
+    <title>Kuis Sejarah Indonesia</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding: 15px; user-select: none; }
         .container { max-width: 600px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
@@ -11,7 +11,7 @@
         h2 { text-align: center; margin-top: 50px; color: #333; }
         .warning-text { text-align: center; color: #d32f2f; font-size: 13px; background: #ffebee; padding: 10px; border-radius: 5px; border: 1px solid #ffcdd2; margin-bottom: 20px;}
         
-        /* Desain Input Baru */
+        /* Desain Input */
         .input-group { margin-bottom: 15px; }
         label { font-weight: bold; display: block; margin-bottom: 5px; }
         input[type="text"], select { width: 100%; padding: 12px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; background: #fff; }
@@ -38,20 +38,33 @@
         
         <div class="input-group">
             <label>Nama Lengkap:</label>
-            <input type="text" id="namaSiswa" placeholder="Contoh: Budi Santoso" required>
+            <input type="text" id="namaSiswa" placeholder="Ketik Nama Lengkap..." required>
         </div>
 
         <div class="input-group">
             <label>Kelas:</label>
             <select id="kelasSiswa">
                 <option value="">-- Pilih Kelas --</option>
-                <option value="X SMA">Kelas X</option>
-                <option value="XI IPS 1">XI IPS 1</option>
-                <option value="XI IPS 2">XI IPS 2</option>
-                <option value="XI IPA 1">XI IPA 1</option>
-                <option value="XI IPA 2">XI IPA 2</option>
-                <option value="XII SMA">Kelas XII</option>
-                </select>
+                
+                <optgroup label="KELAS 10">
+                    <option value="10 Satu">10 Satu</option>
+                    <option value="10 Dua">10 Dua</option>
+                    <option value="10 Tiga">10 Tiga</option>
+                    <option value="10 Empat">10 Empat</option>
+                </optgroup>
+
+                <optgroup label="KELAS 11">
+                    <option value="11 Satu">11 Satu</option>
+                    <option value="11 Dua">11 Dua</option>
+                    <option value="11 Tiga">11 Tiga</option>
+                </optgroup>
+
+                <optgroup label="KELAS 12">
+                    <option value="12 Satu">12 Satu</option>
+                    <option value="12 Dua">12 Dua</option>
+                    <option value="12 Tiga">12 Tiga</option>
+                </optgroup>
+            </select>
         </div>
 
         <form id="examForm">
@@ -191,13 +204,12 @@
             });
             let nilai = Math.round((benar/10)*100);
             
-            // Mengirim data Nama + KELAS + Nilai
             fetch(SCRIPT_URL, {
                 method: "POST", mode: "no-cors",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
                     nama: document.getElementById('namaSiswa').value,
-                    kelas: document.getElementById('kelasSiswa').value, // <-- DATA BARU
+                    kelas: document.getElementById('kelasSiswa').value,
                     nilai: nilai, status: status, j1: detail.join(", ")
                 })
             }).then(() => {
